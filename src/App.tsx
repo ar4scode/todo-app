@@ -8,6 +8,7 @@ import { TextField, Button } from '@mui/material';
 import { nanoid } from 'nanoid';
 
 function App() {
+
   interface Todo {
     id: string;
     inputValue: string;
@@ -33,6 +34,11 @@ function App() {
       },
     ]);
     setInputValue(""); // clear input after adding
+  };
+
+  const handleDelete = (id: string) => {
+      const newTodos = todoList.filter(todo => todo.id !== id);
+      setTodoList(newTodos);
   };
 
   return (
@@ -61,7 +67,7 @@ function App() {
                 <Checkbox color="success" />
                 {todo.inputValue}
               </div>
-              <IconButton aria-label="delete" size="small">
+              <IconButton aria-label="delete" size="small" onClick={() => handleDelete(todo.id)}>
                 <DeleteIcon fontSize="small" sx={{ color: "purple" }} />
               </IconButton>
             </li>
