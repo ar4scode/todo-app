@@ -65,7 +65,8 @@ function App() {
       <ButtonsGroup />
 
       {/* To Do list */}
-      <div>
+      <div className='bg-gray-500 mt-10 rounded-2xl'>
+        <p className='p-2'>number of tasks : {todoList.filter(todo => todo.isChecked).length} / {todoList.length}</p>
         <ul className='mt-10'>
           {todoList.map((todo) => (
             <li 
