@@ -12,13 +12,13 @@ function App() {
   interface Todo {
     id: string;
     inputValue: string;
+    isChecked: boolean;
   }
 
   // input should be a string
   const [inputValue, setInputValue] = useState<string>("");
-
-  // todoList should be an array of Todo objects
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  // const [isChecked, setIsChecked] = useState<string[]>([])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -31,6 +31,7 @@ function App() {
       {
         id: nanoid(),
         inputValue: inputValue,
+        isChecked : false
       },
     ]);
     setInputValue(""); // clear input after adding
@@ -39,6 +40,14 @@ function App() {
   const handleDelete = (id: string) => {
       const newTodos = todoList.filter(todo => todo.id !== id);
       setTodoList(newTodos);
+  };
+
+  const handleCheckboxChange = (id: string) => {
+    setTodoList(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo
+      )
+    );
   };
 
   return (
@@ -63,9 +72,11 @@ function App() {
               key={todo.id}
               className='flex justify-between items-center w-70 text-purple-800 font-bold border-2 p-2 rounded-xl shadow-xl text-sm mb-3'
             >
-              <div>
-                <Checkbox color="success" />
-                {todo.inputValue}
+              <div className='flex items-center'>
+                <Checkbox color="success" value={todo.isChecked} onChange={() => handleCheckboxChange(todo.id)}/>
+                  <p style={{textDecoration : todo.isChecked ? "line-through" : "none"}}>
+                    {todo.inputValue}
+                  </p>
               </div>
               <IconButton aria-label="delete" size="small" onClick={() => handleDelete(todo.id)}>
                 <DeleteIcon fontSize="small" sx={{ color: "purple" }} />
