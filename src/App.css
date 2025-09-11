@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+  background: #33373f;
+}
+
 #root {
   display: flex;
   justify-content: center; /* horizontal center */
