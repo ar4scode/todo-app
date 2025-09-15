@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { TextField, Button } from '@mui/material';
 import { nanoid } from 'nanoid';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -111,6 +112,7 @@ function App() {
         </div>
         }
       </div>
+      <Footer />
     </>
   );
 }
