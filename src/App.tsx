@@ -98,7 +98,7 @@ function App() {
         {/* To Do list */}
         {todoList.length >= 1 && 
           <div className='bg-gray-800 mt-10 rounded-2xl shadow-xl '>
-          <p className='px-5 mt-4 text-gray-400'>Number of tasks : {todoList.filter(todo => todo.isChecked).length} / {todoList.length}</p>
+          <p className='px-5 mt-4 text-gray-400'>Number of completed tasks : {todoList.filter(todo => todo.isChecked).length} / {todoList.length}</p>
           <ul className='mt-10 p-4'>
             {todoList.map((todo) => (
               <li 
@@ -106,7 +106,7 @@ function App() {
                 className='flex justify-between items-center w-70 text-gray-300 font-bold p-2 rounded-xl shadow-md text-sm mb-3 duration-75 hover:scale-110'
               >
                 <div className='flex items-center'>
-                  <Checkbox color="success" sx={{color : "white"}} value={todo.isChecked} onChange={() => handleCheckboxChange(todo.id)}/>
+                  <Checkbox  sx={{color : "white"}} checked={todo.isChecked} onChange={() => handleCheckboxChange(todo.id)}/>
                     <p style={{textDecoration : todo.isChecked ? "line-through" : "none"}}>
                       {todo.inputValue}
                     </p>
