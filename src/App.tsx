@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 // import ButtonsGroup from './components/ButtonsGroup';
 import IconButton from "@mui/material/IconButton"; 
@@ -17,10 +17,18 @@ function App() {
     isChecked: boolean;
   }
 
+  const saved = localStorage.getItem("todoList");
+  const getTodoListItems = saved ? JSON.parse(saved) : [];
+
+
+
   // input should be a string
   const [inputValue, setInputValue] = useState<string>("");
-  const [todoList, setTodoList] = useState<Todo[]>([]);
-  // const [isChecked, setIsChecked] = useState<string[]>([])
+  const [todoList, setTodoList] = useState<Todo[]>(getTodoListItems);
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
